@@ -1,0 +1,26 @@
+{
+  "name": "js-mjs-output",
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "module": "lib/index.mjs",
+  "repository": "github.com/gbedardsice/js-mjs-output",
+  "author": "gbedardsice@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "renamer": "^1.0.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.1.2"
+  },
+  "scripts": {
+    "build": "rm -rf lib && yarn build:es && yarn build:es:move && yarn build:cjs",
+    "build:common": "babel src --out-dir lib",
+    "build:cjs": "BABEL_ENV=cjs yarn build:common",
+    "build:es": "BABEL_ENV=es yarn build:common",
+    "build:es:move": "renamer --find '/\\.js$/' --replace '.mjs' 'lib/**'"
+  }
+}
